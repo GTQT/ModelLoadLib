@@ -4,6 +4,7 @@ import com.drppp.modelloader.Tags;
 import com.drppp.modelloader.api.ModelLoadException;
 import com.drppp.modelloader.api.model.UnifiedModel;
 import com.drppp.modelloader.core.ModelLoaderRegistry;
+import com.drppp.modelloader.render.EnhancedModelRenderer;
 import com.drppp.modelloader.render.VBOModelRenderer;
 import com.drppp.modelloader.util.ModelUtils;
 import net.minecraft.block.Block;
@@ -102,6 +103,7 @@ public class ObjBlockExample {
 
         private UnifiedModel model;
         private VBOModelRenderer vboRenderer;
+        private EnhancedModelRenderer enRenderer;
         private boolean initialized = false;
         private boolean loadFailed = false;
 
@@ -115,8 +117,10 @@ public class ObjBlockExample {
 
                 System.out.println("[TreeModel] " + ModelUtils.getDebugInfo(model));
 
-                vboRenderer = new VBOModelRenderer();
-                vboRenderer.upload(model);
+                //vboRenderer = new VBOModelRenderer();
+                //vboRenderer.upload(model);
+                enRenderer=new EnhancedModelRenderer();
+                enRenderer.setModel(model);
                 initialized = true;
 
                 System.out.println("[TreeModel] Loaded successfully!");
@@ -131,7 +135,7 @@ public class ObjBlockExample {
         public void render(TileCustomMachine te, double x, double y, double z,
                            float partialTicks, int destroyStage, float alpha) {
             if (!initialized && !loadFailed) init();
-            if (vboRenderer == null) return;
+            if (enRenderer == null) return;
 
             GlStateManager.pushMatrix();
 
@@ -141,7 +145,7 @@ public class ObjBlockExample {
             GlStateManager.translate(x + 0.5, y + 0.375, z + 0.375);
 
             // ★ 不要缩放 1/16！模型已经是方块单位
-            float scale = 1.0f;
+            float scale = 10.0f;
             GlStateManager.scale(scale, scale, scale);
 
             // 根据方块朝向旋转
@@ -155,7 +159,7 @@ public class ObjBlockExample {
 
             // 绑定纹理并渲染
             bindTexture(TEXTURE);
-            vboRenderer.render();
+            enRenderer.render(partialTicks);
 
             GlStateManager.popMatrix();
         }

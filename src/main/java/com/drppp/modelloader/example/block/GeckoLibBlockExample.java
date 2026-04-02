@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.ResourceLocation;
@@ -22,6 +23,7 @@ public class GeckoLibBlockExample {
             super(Material.WOOD);
             setRegistryName(Tags.MOD_ID, "animated_chest");
             setTranslationKey(Tags.MOD_ID + ".animated_chest");
+            setCreativeTab(CreativeTabs.MISC);
         }
 
         @Override

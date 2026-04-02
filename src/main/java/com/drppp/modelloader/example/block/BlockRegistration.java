@@ -1,6 +1,7 @@
 package com.drppp.modelloader.example.block;
 
 import com.drppp.modelloader.Tags;
+import com.drppp.modelloader.example.item.BotariumItemTEISR;
 import com.drppp.modelloader.example.item.TreeItemTEISR;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -30,7 +31,12 @@ public class BlockRegistration {
 
     public static final Block B3D_WINDMILL =
             new B3dBlockExample.BlockWindmill();
+    public static final Block BOTARIUM_BLOCK =
+            new BotariumBlockExample.BlockBotarium();
 
+    public static final Item BOTARIUM_ITEM =
+            new ItemBlock(BOTARIUM_BLOCK)
+                    .setRegistryName(BOTARIUM_BLOCK.getRegistryName());
     // ===================== 对应的 ItemBlock =====================
 
     public static final Item OBJ_MACHINE_ITEM =
@@ -49,7 +55,8 @@ public class BlockRegistration {
         event.getRegistry().registerAll(
                 OBJ_MACHINE,
                 GECKOLIB_CHEST,
-                B3D_WINDMILL
+                B3D_WINDMILL,
+                BOTARIUM_BLOCK
         );
 
         GameRegistry.registerTileEntity(ObjBlockExample.TileCustomMachine.class,
@@ -58,6 +65,8 @@ public class BlockRegistration {
                 new ResourceLocation(Tags.MOD_ID, "animated_chest"));
         GameRegistry.registerTileEntity(B3dBlockExample.TileWindmill.class,
                 new ResourceLocation(Tags.MOD_ID, "windmill"));
+        GameRegistry.registerTileEntity(BotariumBlockExample.TileBotarium.class,
+                new ResourceLocation(Tags.MOD_ID, "botarium_te"));
     }
 
     // ===================== 注册物品形态 =====================
@@ -67,8 +76,10 @@ public class BlockRegistration {
         event.getRegistry().registerAll(
                 OBJ_MACHINE_ITEM,
                 GECKOLIB_CHEST_ITEM,
-                B3D_WINDMILL_ITEM
+                B3D_WINDMILL_ITEM,
+                BOTARIUM_ITEM
         );
+
     }
 
     // ===================== 客户端注册 =====================
@@ -88,10 +99,13 @@ public class BlockRegistration {
         ClientRegistry.bindTileEntitySpecialRenderer(
                 B3dBlockExample.TileWindmill.class,
                 new B3dBlockExample.TESRWindmill());
+        ClientRegistry.bindTileEntitySpecialRenderer(
+                BotariumBlockExample.TileBotarium.class,
+                new BotariumBlockExample.TESRBotarium());
 
         // ★★★ 绑定 TEISR（物品在手中/GUI/掉落的渲染）★★★
         OBJ_MACHINE_ITEM.setTileEntityItemStackRenderer(TreeItemTEISR.INSTANCE);
-
+        BOTARIUM_ITEM.setTileEntityItemStackRenderer(BotariumItemTEISR.INSTANCE);
         // 注册 ItemBlock 模型
         ModelLoader.setCustomModelResourceLocation(OBJ_MACHINE_ITEM, 0,
                 new ModelResourceLocation(Tags.MOD_ID + ":tree", "inventory"));
@@ -99,5 +113,7 @@ public class BlockRegistration {
                 new ModelResourceLocation(Tags.MOD_ID + ":animated_chest", "inventory"));
         ModelLoader.setCustomModelResourceLocation(B3D_WINDMILL_ITEM, 0,
                 new ModelResourceLocation(Tags.MOD_ID + ":windmill", "inventory"));
+        ModelLoader.setCustomModelResourceLocation(BOTARIUM_ITEM, 0,
+                new ModelResourceLocation(Tags.MOD_ID + ":botarium", "inventory"));
     }
 }
