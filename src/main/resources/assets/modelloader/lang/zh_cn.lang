@@ -1,0 +1,4 @@
+tile.modelloader.custom_machine.name=自定义树模型
+item.modelloader.obj_sword.name=OBJ剑
+item.modelloader.magic_staff.name=魔法杖
+item.modelloader.drill.name=钻头

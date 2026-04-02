@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "modelloader:tree" },
+    "facing=south": { "model": "modelloader:tree", "y": 180 },
+    "facing=west":  { "model": "modelloader:tree", "y": 270 },
+    "facing=east":  { "model": "modelloader:tree", "y": 90 }
+  }
+}
