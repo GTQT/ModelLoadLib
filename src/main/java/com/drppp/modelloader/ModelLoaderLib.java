@@ -42,5 +42,6 @@ public class ModelLoaderLib {
 
         LOGGER.info("ModelLoaderLib initialized. Supported formats: {}",
                 registry.getSupportedExtensions());
+
     }
 }
