@@ -1,13 +1,13 @@
 {
 	"package": "com.drppp.modelloader.mixin",
 	"required": true,
-	"refmap": "${mixin_refmap}",
-	"target": "@env(DEFAULT)",
+	"refmap": "mixins.modelloader.refmap.json",
 	"minVersion": "0.8.5",
 	"compatibilityLevel": "JAVA_8",
-	"mixins": [],
-	"server": [],
-	"client": [
 
-	]
+	"mixins": [],
+	"client": [
+		"MixinBlockRendererDispatcher"
+	],
+	"server": []
 }
